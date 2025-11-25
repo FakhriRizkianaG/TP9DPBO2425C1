@@ -2,6 +2,10 @@
 TP 9 Frizkia (Fakhri Rizkiana)
 
 # Janji
+Saya Fakhri Rizkiana Sya'ban Kusnendar dengan NIM 2405534 mengerjakan<br> 
+TP 9 dalam mata kuliah Desain dan Pemrograman<br>
+Berorientasi Objek untuk keberkahanNya maka saya tidak<br>
+melakukan kecurangan seperti yang telah dispesifikasikan. Aamiin.<br>
 
 # Penjelasan Program
 Aplikasi ini adalah contoh sederhana implementasi pola Model-View-Presenter (MVP) untuk mengelola data Pembalap dan Tim balap. Program ini bertujuan untuk memisahkan logika bisnis, tampilan, dan interaksi pengguna, sehingga kode menjadi lebih terstruktur, mudah diuji, dan dipelihara.
