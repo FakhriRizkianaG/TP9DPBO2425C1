@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tim — Form</title>
+  <style>
+    :root{
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --border: #e6e9ef;
+      --radius: 8px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    body{background:var(--bg);}
+    .container{max-width:480px;margin:36px auto;padding:18px;}
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:24px;
+      box-shadow: 0 1px 2px rgba(16,24,40,0.03);
+    }
+    h2{margin:0 0 20px 0;font-size:20px}
+    
+    label{display:block;margin:10px 0 5px;font-size:14px;font-weight:600}
+    input[type="text"], input[type="number"]{
+      width:100%;
+      padding:10px;
+      margin-bottom:15px;
+      border:1px solid var(--border);
+      border-radius:6px;
+      box-sizing:border-box;
+    }
+    .form-actions{margin-top:20px;display:flex;gap:10px;}
+    .btn{padding:10px 14px;border-radius:8px;cursor:pointer;text-decoration:none;font-size:14px;}
+    .btn-primary{background:var(--accent);color:#fff;border:none;}
+    .btn-secondary{background:#f1f3f6;color:var(--muted);border:1px solid var(--border);}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <form action="index.php" method="POST">
+        <!-- Judul akan disuntikkan di sini oleh ViewTim -->
+        <h2><!-- FORM_TITLE --></h2>
+        
+        <!-- Hidden fields untuk CRUD -->
+        <input type="hidden" name="action" value="[FORM_ACTION]">
+        <input type="hidden" name="id" value="[FORM_ID]">
+        <!-- PENTING: Menambahkan entity agar Index.php tahu ini adalah data Tim -->
+        <input type="hidden" name="entity" value="tim"> 
+
+        <label for="nama">Nama Tim</label>
+        <input id="nama" name="nama" type="text" placeholder="Nama tim" value="">
+
+        <label for="tahunTerbentuk">Tahun Terbentuk</label>
+        <!-- Menggunakan min="1900" step="1" sudah bagus untuk tahun -->
+        <input id="tahunTerbentuk" name="tahunTerbentuk" type="number" min="1900" step="1" placeholder="Tahun (mis. 2005)" value="">
+
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Simpan</button>
+          <a href="index.php?entity=tim" class="btn btn-secondary">Batal</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

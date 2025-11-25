@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Form Pembalap</title>
+  <style>
+    :root{
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --danger: #ef4444;
+      --border: #e6e9ef;
+      --radius: 8px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;margin:0;background:var(--bg);}
+    .container{max-width:700px;margin:36px auto;padding:18px;}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
+    h1{margin:0 0 8px;font-size:18px}
+    p.lead{margin:0 0 16px;color:var(--muted);font-size:13px}
+
+    form{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    label{display:block;font-size:13px;color:var(--muted);margin-bottom:6px}
+    input[type="text"], input[type="number"], select{width:100%;padding:10px;border:1px solid var(--border);border-radius:6px;font-size:14px;box-sizing:border-box}
+
+    .full{grid-column:1/-1}
+    .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
+    .btn{padding:10px 14px;border-radius:8px;border:1px solid transparent;font-size:14px;cursor:pointer}
+    .btn-primary{background:var(--accent);color:#fff}
+    .btn-muted{background:transparent;border:1px solid var(--border);color:var(--muted)}
+    .btn-danger{background:transparent;color:var(--danger);border:1px solid transparent}
+
+    @media (max-width:640px){
+      form{grid-template-columns:1fr}
+      .actions{justify-content:space-between}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Form Pembalap</h1>
+
+      <form method="post" action="index.php" novalidate data-form="pembalap">
+        <!-- hidden fields for action and id -->
+        <input type="hidden" name="action" value="add" id="pembalap-action" data-field>
+        <input type="hidden" name="id" value="" id="pembalap-id" data-field>
+
+        <div>
+          <label for="nama">Nama</label>
+          <input id="nama" name="nama" type="text" placeholder="Nama pembalap" required data-field>
+        </div>
+
+        <div>
+          <label for="tim">Tim</label>
+          <input id="tim" name="tim" type="text" placeholder="Nama tim" required data-field>
+        </div>
+
+        <div>
+          <label for="negara">Negara</label>
+          <input id="negara" name="negara" type="text" placeholder="Negara (mis. Indonesia)" data-field>
+        </div>
+
+        <div>
+          <label for="poinMusim">Poin Musim</label>
+          <input id="poinMusim" name="poinMusim" type="number" min="0" step="1" placeholder="0" data-field>
+        </div>
+
+        <div class="full">
+          <label for="jumlahMenang">Jumlah Menang</label>
+          <input id="jumlahMenang" name="jumlahMenang" type="number" min="0" step="1" placeholder="0" data-field>
+        </div>
+
+        <div class="full actions">
+          <a href="index.php" class="btn btn-muted">Batal</a>
+          <button type="submit" class="btn btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      var form = document.querySelector('form');
+      if(!form) return;
+      form.addEventListener('submit', function(e){
+        var nama = document.getElementById('nama');
+        if(!nama.value.trim()){
+          alert('Nama harus diisi');
+          nama.focus();
+          e.preventDefault();
+          return false;
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
