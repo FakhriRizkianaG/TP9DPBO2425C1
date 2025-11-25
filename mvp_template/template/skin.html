@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pembalap — Daftar</title>
+  <style>
+    :root{
+      --bg: #f7f8fb;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --danger: #ef4444;
+      --border: #e6e9ef;
+      --radius: 8px;
+      --pad: 14px;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color-scheme: light;
+    }
+
+    html,body{height:100%;margin:0;background:var(--bg);}
+    .container{max-width:980px;margin:36px auto;padding:18px;}
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:12px;
+      box-shadow: 0 1px 2px rgba(16,24,40,0.03);
+    }
+
+    h1{margin:0 0 12px 0;font-size:18px}
+    p.lead{margin:0 0 16px 0;color:var(--muted);font-size:13px}
+
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    thead th{ text-align:left;padding:12px 10px;background:transparent;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border)}
+    tbody td{padding:12px 10px;border-bottom:1px solid var(--bg);vertical-align:middle}
+
+    tbody tr:last-child td{border-bottom:0}
+
+    .col-id{width:48px;color:var(--muted);}
+    .col-actions{width:170px;text-align:right}
+
+    .btn{
+      display:inline-block;padding:8px 10px;border-radius:6px;border:1px solid transparent;font-size:13px;cursor:pointer;text-decoration:none;
+    }
+    .btn-edit{background:transparent;color:var(--accent);border-color:transparent}
+    .btn-delete{background:transparent;color:var(--danger);border-color:transparent;margin-left:8px}
+    .btn-add{background:var(--accent);color:#fff;border:none;padding:10px 14px;border-radius:8px;display:inline-flex;align-items:center;gap:8px}
+
+    /* small screens */
+    @media (max-width:640px){
+      thead th:nth-child(4), tbody td:nth-child(4), thead th:nth-child(5), tbody td:nth-child(5) {display:none}
+      .col-actions{width:130px}
+      .container{padding:10px;margin:18px}
+    }
+
+    /* very subtle hover */
+    tbody tr:hover td{background:linear-gradient(90deg, rgba(37,99,235,0.02), transparent)}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Daftar Pembalap</h1>
+
+      <div style="overflow:auto;">
+        <table role="table" aria-label="Daftar Pembalap">
+          <thead>
+            <tr>
+              <th class="col-id">No</th>
+              <th>Nama</th>
+              <th>Tim</th>
+              <th>Negara</th>
+              <th>Poin Musim</th>
+              <th>Jumlah Menang</th>
+              <th class="col-actions">Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+          <!-- PHP will inject rows here -->
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top:14px;display:flex;justify-content:space-between;align-items:center">
+        <div style="color:var(--muted);font-size:13px">Total:</div>
+        <div>
+          <a href="index.php?screen=add" class="btn btn-add" id="btn-add">+ Tambah Pembalap</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('click', function(e){
+      var d = e.target.closest && e.target.closest('.btn-delete');
+      if(!d) return;
+      var id = d.getAttribute('data-id');
+      if(!id) return;
+      var ok = confirm('Yakin ingin menghapus entri #' + id + '?');
+      if(!ok) return;
+      
+      // Create a hidden form and submit it
+      var form = document.createElement('form');
+      form.method = 'POST';
+      form.action = 'index.php';
+      
+      var actionInput = document.createElement('input');
+      actionInput.type = 'hidden';
+      actionInput.name = 'action';
+      actionInput.value = 'delete';
+      form.appendChild(actionInput);
+      
+      var idInput = document.createElement('input');
+      idInput.type = 'hidden';
+      idInput.name = 'id';
+      idInput.value = id;
+      form.appendChild(idInput);
+      
+      document.body.appendChild(form);
+      form.submit();
+    });
+  </script>
+</body>
+</html>
